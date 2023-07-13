@@ -1,6 +1,6 @@
 <template>
   <div class="wrapper">
-    <FormComp :fileds="dates" @sendForm="handleUpdateFields" />
+    <FormComp :fileds="dates" v-model="dates" />
   </div>
   <div v-for="el in dates" :key="el.name">{{ el }}</div>
 </template>
@@ -12,17 +12,10 @@ export default {
   components: {
     FormComp,
   },
-  emits: ["sendForm"],
   data() {
     return {
       dates: [],
     };
-  },
-
-  methods: {
-    handleUpdateFields(newForm) {
-      this.dates = [...this.dates, newForm];
-    },
   },
 
   mounted() {

@@ -17,7 +17,7 @@
       </div>
     </div>
 
-    <button @click="addForm(group)" class="addBtn">+</button>
+    <button @click="addForm(group, this.value)" class="addBtn">+</button>
   </div>
 </template>
 
@@ -25,6 +25,10 @@
 export default {
   props: {
     fileds: {
+      type: Array,
+      required: true,
+    },
+    modelValue: {
       type: Array,
       required: true,
     },
@@ -44,14 +48,14 @@ export default {
   },
   methods: {
     addForm(group) {
-      console.log(group);
+      console.log(this.data);
       const newForm = {
         group: group,
         name: "",
         value: "",
         accept: true,
       };
-      this.$emit("sendForm", newForm);
+      this.$emit("update:modelValue", [...this.modelValue, newForm]);
     },
     acceptChange(item) {
       if (item.name) {
